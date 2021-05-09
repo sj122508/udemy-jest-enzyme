@@ -24,10 +24,18 @@ export default class App extends Component {
     }
   }
   
-  handleClickCounter = () => {
-    const counter = this.state.counter + 1
+  handleClickIncrementCounter = () => {
+    let {counter} = this.state
+    counter++
+    this.setState({counter})
+  }
 
-     this.setState({ counter})
+  handleClickDecrementCounter = () => {
+    let { counter } = this.state
+     if (counter > 0)
+      counter--
+
+     this.setState({ counter })
   }
   
 
@@ -37,7 +45,9 @@ export default class App extends Component {
     return (
       <div data-test="component-app">
         <h1 data-test="counter-display">The count is {counter}</h1>
-        <button data-test="increment-button" onClick={this.handleClickCounter}>Increment counter</button>
+       {counter == 0 ? <h2 data-test="error-display">The counter cannot go below {counter}</h2> : ""} 
+        <button data-test="increment-button" onClick={this.handleClickIncrementCounter}>Increment counter</button>
+        <button data-test="decrement-button" onClick={this.handleClickDecrementCounter}>Decrement counter</button>
       </div>
     )
   }

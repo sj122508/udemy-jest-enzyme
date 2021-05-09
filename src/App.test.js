@@ -15,7 +15,7 @@ Enzyme.configure({adapter: new EnzymeAdapter()});
   * @returns {ShallowWrapper}
 */
 
-const setup = (props={}, state=null) =>{
+const setup = (props = {}, state = null) =>{
   const wrapper = shallow(<App {...props}/>)
   if (state) wrapper.setState(state);
   return wrapper
@@ -70,4 +70,61 @@ test('clicking button increments counter display', () => {
   // find display and test value
   const counterDisplay = findByTestAttribute(wrapper, 'counter-display')
   expect(counterDisplay.text()).toContain(counter + 1)
+})
+
+
+test('render decrement button', () =>{
+  const wrapper = setup()
+  const button =  findByTestAttribute(wrapper, 'decrement-button')
+  expect(button.length).toBe(1)
+})
+
+test('clicking button decrements counter display', () =>{
+  const counter = 7
+  const wrapper = setup(null, {counter})
+
+  const button = findByTestAttribute(wrapper,'decrement-button')
+  button.simulate('click')
+  wrapper.update()
+
+  const counterDisplay = findByTestAttribute(wrapper,'counter-display')
+  // console.log(counterDisplay)
+  expect(counterDisplay.text()).toContain(counter - 1)
+})
+
+test('clicking button decrement counter remain 0', () => {
+  const counter = 0
+  const wrapper = setup(null, {counter})
+
+  const button = findByTestAttribute(wrapper, 'decrement-button')
+  button.simulate('click')
+  wrapper.update()
+
+  const counterDisplay = findByTestAttribute(wrapper, 'counter-display')
+  expect(counterDisplay.text()).toContain(counter)
+})
+
+test('render error message', () =>{
+  const counter = 0
+  const wrapper = setup(null, counter)
+
+  const button = findByTestAttribute(wrapper, 'decrement-button')
+  button.simulate('click')
+  wrapper.update()
+
+  const errorDisplay = findByTestAttribute(wrapper, 'error-display')
+  expect(errorDisplay.length).toBe(1)
+})
+
+
+test('hide error message', () =>{
+  const counter = 0
+  const wrapper = setup(null, counter)
+
+  const button = findByTestAttribute(wrapper, 'increment-button')
+  button.simulate('click')
+  wrapper.update()
+
+  const errorDisplay = findByTestAttribute(wrapper, 'error-display')
+  expect(errorDisplay.length).toBe(0)
 })
