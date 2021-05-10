@@ -24,6 +24,20 @@ export default class App extends Component {
     }
   }
   
+  componentDidMount() {
+    // alert()
+    // let obj1 = { foo: 'bar', y: 42 };
+    // let obj2 = { foo: 'baz', y: 13 };
+
+    // let clonedObj = { ...obj1 };
+    // // Object { foo: "bar", x: 42 }
+
+    // let mergedObj = { ...obj2,...obj1 };
+
+    // console.log(clonedObj)
+    // console.log(mergedObj)
+  }
+
   handleClickIncrementCounter = () => {
     let {counter} = this.state
     counter++
@@ -45,7 +59,7 @@ export default class App extends Component {
     return (
       <div data-test="component-app">
         <h1 data-test="counter-display">The count is {counter}</h1>
-       {counter == 0 ? <h2 data-test="error-display">The counter cannot go below {counter}</h2> : ""} 
+       {counter === 0 ? <h2 data-test="error-display">The counter cannot go below {counter}</h2> : ""} 
         <button data-test="increment-button" onClick={this.handleClickIncrementCounter}>Increment counter</button>
         <button data-test="decrement-button" onClick={this.handleClickDecrementCounter}>Decrement counter</button>
       </div>
