@@ -1,9 +1,7 @@
 import React from 'react'
 import {shallow} from 'enzyme'
-
 import Congrats from './Congrats'
 import {findByTestAttribute, checkProps} from '../../test/testUtilities'
-
 
 
 const defaultProps = {success : false}
