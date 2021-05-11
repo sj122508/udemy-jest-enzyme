@@ -1,19 +1,9 @@
-// import logo from './logo.svg';
-// import './App.css';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <h1>Hello World</h1>
-     
-//     </div>
-//   );
-// }
-
-// export default App;
 
 import React, { Component } from 'react'
 import './App.css';
+import Congrats from './Jotto/Congrats'
+import GuessedWords from './Jotto/GuessedWords'
 
 export default class App extends Component {
   constructor(props) {
@@ -57,11 +47,21 @@ export default class App extends Component {
     const {counter} = this.state
 
     return (
-      <div data-test="component-app">
-        <h1 data-test="counter-display">The count is {counter}</h1>
-       {counter === 0 ? <h2 data-test="error-display">The counter cannot go below {counter}</h2> : ""} 
-        <button data-test="increment-button" onClick={this.handleClickIncrementCounter}>Increment counter</button>
-        <button data-test="decrement-button" onClick={this.handleClickDecrementCounter}>Decrement counter</button>
+      <div className="container">
+        <div data-test="component-app">
+          <h1 data-test="counter-display">The count is {counter}</h1>
+        {counter === 0 ? <h2 data-test="error-display">The counter cannot go below {counter}</h2> : ""} 
+          <button data-test="increment-button" onClick={this.handleClickIncrementCounter}>Increment counter</button>
+          <button data-test="decrement-button" onClick={this.handleClickDecrementCounter}>Decrement counter</button>
+        </div>
+
+        <div>
+          <h1>Jotto</h1>
+          <Congrats success={true}/>
+          <GuessedWords guessedWords={[
+            { guessedWord: 'train', letterMatchCount: 3}
+          ]} />
+        </div>
       </div>
     )
   }
